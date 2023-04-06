@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'myapp',
+
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +130,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ['https://*.gitpod.io']
+
+GRAPH_MODELS = {
+    
+}

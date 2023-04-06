@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import datetime
-from .models import Song
+
+from .models import Song, Artist
+
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer, GroupSerializer, SongSerializer
+from .serializers import *
 # Create your views here.
 
 
@@ -15,6 +17,14 @@ class SongViewSet(viewsets.ModelViewSet):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
+
+class ArtistViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    
 
 class UserViewSet(viewsets.ModelViewSet):
     """
