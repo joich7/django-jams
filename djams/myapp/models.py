@@ -14,30 +14,30 @@ class Song(models.Model):
 
 class Playlist(models.Model):
     name = models.CharField(max_length=100, null=True)
-    song = models.ManyToManyField(Song)
+    song = models.ManyToManyField('Song')
 
     def __str__(self):
         return self.name
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Artist(models.Model):
-    name = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Album(models.Model):
-    name = models.CharField(max_length=100, null=True)
-    artist = models.ManyToManyField(Artist)
-    genre = models.ManyToManyField(Genre)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    artist = models.ManyToManyField('Artist')
+    genre = models.ManyToManyField('Genre')
 
     def __str__(self):
         return self.name
