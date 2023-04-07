@@ -3,43 +3,62 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
-
-
-class SongSerializer(serializers.ModelSerializer):
+class SongReadOnlySerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = ['name', 'album']
 
 
-class PlaylistSerializer(serializers.ModelSerializer):
+class SongWriteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Playlist
-        fields = ['name', 'song']
+        model = Song
+        fields = ['name', 'album']
 
 
-class GenreSerializer(serializers.ModelSerializer):
+# class PlaylistSerializer(serializers.ModelSerializer):
+#    class Meta:
+#        model = Playlist
+#        fields = ['name', 'song']
+#
+
+# Gere Serialisers
+class GenreReadOnlySerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ['name']
+        fields = ['name',]
 
 
-class ArtistSerializer(serializers.ModelSerializer):
+class GenreWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ['name',]
+
+# Artist Serializers
+
+
+class ArtistReadOnlySerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = ['name',]
 
 
-class AlbumSerializer(serializers.ModelSerializer):
+class ArtistWriteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Album
+        model = Artist
         fields = ['name',]
+
+# ALbum Serializers
+
+
+class AlbumReadOnlySerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = Album
+        fields = ['name', 'songs']
+
+
+class AlbumWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        songs = SongReadOnlySerializer(many=True, source='song')
+        model = Album
+        fields = ['name', 'songs']

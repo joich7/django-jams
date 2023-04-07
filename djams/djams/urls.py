@@ -21,10 +21,8 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 router.register(r'songs', views.SongViewSet)
-router.register(r'playlists', views.PlaylistViewSet)
+# router.register(r'playlists', views.PlaylistViewSet)
 router.register(r'genres', views.GenreViewSet)
 router.register(r'artists', views.ArtistViewSet)
 router.register(r'albums', views.AlbumViewSet)

@@ -11,56 +11,49 @@ from .serializers import *
 
 
 class SongViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+
     queryset = Song.objects.all()
-    serializer_class = SongSerializer
 
-
-class PlaylistViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = PlaylistSerializer
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            return SongWriteSerializer
+        return SongReadOnlySerializer
 
 
 class GenreViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+
     queryset = Genre.objects.all()
-    serializer_class = GenreSerializer
+
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            return GenreWriteSerializer
+        return GenreReadOnlySerializer
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+
     queryset = Artist.objects.all()
-    serializer_class = ArtistSerializer
+
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            return ArtistWriteSerializer
+        return ArtistReadOnlySerializer
 
 
 class AlbumViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+
     queryset = Group.objects.all()
-    serializer_class = AlbumSerializer
+
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            return AlbumWriteSerializer
+        return AlbumReadOnlySerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+# class PlaylistViewSet(viewsets.ModelViewSet):
+#    """
+#    API endpoint that allows groups to be viewed or edited.
+#    """
+#    queryset = Group.objects.all()
+#    serializer_class = PlaylistSerializer
+#
